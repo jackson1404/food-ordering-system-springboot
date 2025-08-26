@@ -1,14 +1,18 @@
 package com.jackson.food_ordering_system.auth.service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -17,6 +21,18 @@ public class JwtService {
 
     @Value("${jwt.secret}")
     private String jwtSecret;
+
+    public String generateToken(String userName, String role){
+        return Jwts.builder()
+                .setId(UUID.randomUUID().toString())
+                .setSubject(userName)
+                .setIssuedAt(new Date())
+                .setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.MINUTES)))
+                .claim("role" , role)
+                .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
 
     public String extractUserName(String token) {
         return parseClaim(token).getSubject();
@@ -29,7 +45,7 @@ public class JwtService {
 
     public Claims parseClaim(String token){
         return Jwts.parserBuilder()
-                .setSigningKey(jwtSecret.getBytes())
+                .setSigningKey(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
