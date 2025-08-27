@@ -2,11 +2,14 @@ spring:
   application:
     name: food-ordering-system
 
+  #  database config
   datasource:
     url: jdbc:postgresql://localhost:5432/food_order_system_db
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
+
+  #   jpa config
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,5 +17,29 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: your client-id
+            client-secret: your client-secret
+            scope:
+              - profile
+              - email
+              - openid
+            redirect-url: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://openidconnect.googleapis.com/v1/userinfo
+            user-name-attribute: sub
+
+# jwt config
 jwt:
-  secret: myverysecurejwtsecretkey1234567890123456789012
+  secret: your jwt secret
+
+app:
+  oauth2:
+    redirect-success-uri: http://localhost:5173/oauth2/callback
