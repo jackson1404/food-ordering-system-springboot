@@ -2,14 +2,14 @@ spring:
   application:
     name: food-ordering-system
 
-#  database config
+  #  database config
   datasource:
     url: jdbc:postgresql://localhost:5432/food_order_system_db
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
 
-#   jpa config
+  #   jpa config
   jpa:
     hibernate:
       ddl-auto: update
