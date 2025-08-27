@@ -4,7 +4,7 @@
  * Version      : 	
  * History  :	
  * *************************************************************/
-package com.jackson.food_ordering_system.admin.oauth.handler;
+package com.jackson.food_ordering_system.auth.oauth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jackson.food_ordering_system.auth.service.JwtService;
