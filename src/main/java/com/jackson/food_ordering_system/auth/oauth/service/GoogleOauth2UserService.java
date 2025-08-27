@@ -4,7 +4,7 @@
  * Version      : 	
  * History  :	
  * *************************************************************/
-package com.jackson.food_ordering_system.auth.oauth2.service;
+package com.jackson.food_ordering_system.auth.oauth.service;
 
 import com.jackson.food_ordering_system.user.model.UserEntity;
 import com.jackson.food_ordering_system.user.repo.UserRepository;
