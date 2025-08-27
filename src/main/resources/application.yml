@@ -39,3 +39,7 @@ spring:
 # jwt config
 jwt:
   secret: myverysecurejwtsecretkey1234567890123456789012
+
+app:
+  oauth2:
+    redirect-success-uri: http://localhost:5173/oauth2/callback
