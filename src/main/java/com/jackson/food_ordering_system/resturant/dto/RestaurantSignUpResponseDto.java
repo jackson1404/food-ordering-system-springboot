@@ -24,4 +24,5 @@ public class RestaurantSignUpResponseDto {
     private String cuisine;
     private String status;
 
+
 }

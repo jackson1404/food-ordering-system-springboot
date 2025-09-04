@@ -16,4 +16,5 @@ package com.jackson.food_ordering_system.resturant.enumerate;
 
 public enum RestaurantStatus {
     PENDING, APPROVED, REJECTED, SUSPENDED
+
 }

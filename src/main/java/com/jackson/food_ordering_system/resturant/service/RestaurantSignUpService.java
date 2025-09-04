@@ -23,4 +23,5 @@ public interface RestaurantSignUpService {
      RestaurantSignUpResponseDto registerRestaurant(RestaurantSignUpRequestDto requestDto);
 
 
+
 }

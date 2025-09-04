@@ -20,4 +20,5 @@ public class RestaurantSignUpRequestDto {
 
     private String cuisine;
 
+
 }

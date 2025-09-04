@@ -63,4 +63,5 @@ public class RestaurantSignUpServiceImpl implements RestaurantSignUpService {
         RestaurantEntity savedRestaurant = restaurantRepository.save(restaurant);
         return ObjectMapper.map(savedRestaurant, RestaurantSignUpResponseDto.class);
     }
+
 }
