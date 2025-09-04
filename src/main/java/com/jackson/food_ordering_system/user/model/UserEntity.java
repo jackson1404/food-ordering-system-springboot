@@ -7,6 +7,7 @@ import lombok.*;
 @Table(name = "tbl_users")
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity {
@@ -17,6 +18,7 @@ public class UserEntity {
 
     private String username;
     private String password;
+    private String phone;
     private String email;
     private String role;
 

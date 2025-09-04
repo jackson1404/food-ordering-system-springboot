@@ -6,8 +6,10 @@
  * *************************************************************/
 package com.jackson.food_ordering_system.resturant.entity;
 
+import com.jackson.food_ordering_system.resturant.enumerate.RestaurantStatus;
 import com.jackson.food_ordering_system.user.model.UserEntity;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +22,11 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "tbl_restaurants")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RestaurantEntity {
 
     @Id
@@ -36,7 +43,9 @@ public class RestaurantEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-    private UserEntity user;
+    private UserEntity owner;
+
+    private RestaurantStatus restaurantStatus;
 
     private LocalDateTime createAt;
 
