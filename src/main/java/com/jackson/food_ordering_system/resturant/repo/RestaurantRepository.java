@@ -9,6 +9,8 @@ package com.jackson.food_ordering_system.resturant.repo;
 import com.jackson.food_ordering_system.resturant.entity.RestaurantEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * RestaurantRepository Class.
  * <p>
@@ -19,4 +21,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RestaurantRepository extends JpaRepository<RestaurantEntity, Long> {
 
+    List<RestaurantEntity> findByRestaurantStatus(String status);
 }
