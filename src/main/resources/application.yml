@@ -9,6 +9,19 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
+  #  mail config
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_ADDRESS}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   #   jpa config
   jpa:
     hibernate:
@@ -22,13 +35,13 @@ spring:
       client:
         registration:
           google:
-            client-id: your client-id
-            client-secret: your client-secret
+            client-id: 976496236052-kr0clk8ovkujnaod8faf7li9e8o6o2ce.apps.googleusercontent.com      # Get this from Google Cloud Console
+            client-secret: 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
             scope:
               - profile
               - email
               - openid
-            redirect-url: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
@@ -38,8 +51,10 @@ spring:
 
 # jwt config
 jwt:
-  secret: your jwt secret
+  secret: myverysecurejwtsecretkey1234567890123456789012
 
 app:
+  frontend-base-url: http://localhost:5173
+  token-expiration-hours: 48
   oauth2:
     redirect-success-uri: http://localhost:5173/oauth2/callback

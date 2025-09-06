@@ -6,7 +6,6 @@
  * *************************************************************/
 package com.jackson.food_ordering_system.resturant.entity;
 
-import com.jackson.food_ordering_system.resturant.enumerate.RestaurantStatus;
 import com.jackson.food_ordering_system.user.model.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,9 +44,9 @@ public class RestaurantEntity {
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
 
-    private RestaurantStatus restaurantStatus;
+    private String restaurantStatus;
 
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
 
 

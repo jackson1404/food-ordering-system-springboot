@@ -7,8 +7,8 @@
 package com.jackson.food_ordering_system.admin.service.serviceImpl;
 
 import com.jackson.food_ordering_system.admin.service.AdminRestaurantService;
+import com.jackson.food_ordering_system.resturant.constants.RestaurantStatus;
 import com.jackson.food_ordering_system.resturant.entity.RestaurantEntity;
-import com.jackson.food_ordering_system.resturant.enumerate.RestaurantStatus;
 import com.jackson.food_ordering_system.resturant.repo.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService {
     public void approveRestaurant(Long id) {
         RestaurantEntity restaurant = restaurantRepository.findById(id).orElseThrow(() -> new IllegalCallerException("Restaurant with {} not found" + id));
 
-        if (restaurant.getRestaurantStatus() == RestaurantStatus.APPROVED){
+        if (restaurant.getRestaurantStatus().equals(RestaurantStatus.APPROVED)){
             throw new IllegalStateException("Restaurant already approved.");
         }
 
@@ -48,7 +48,7 @@ public class AdminRestaurantServiceImpl implements AdminRestaurantService {
         RestaurantEntity restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
 
-        if (restaurant.getRestaurantStatus() == RestaurantStatus.REJECTED) {
+        if (restaurant.getRestaurantStatus().equals(RestaurantStatus.REJECTED)){
             throw new IllegalStateException("Restaurant already rejected");
         }
 

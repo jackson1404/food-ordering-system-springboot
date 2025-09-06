@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 /**
  * RestaurantSignUpServiceImpl Class.
  * <p>
@@ -56,7 +58,8 @@ public class RestaurantSignUpServiceImpl implements RestaurantSignUpService {
                 .restaurantName(requestDto.getRestaurantName())
                 .restaurantAddress(requestDto.getRestaurantAddress())
                 .cuisine(requestDto.getCuisine())
-                .restaurantStatus(RestaurantStatus.PENDING)
+                .restaurantStatus(String.valueOf(RestaurantStatus.PENDING))
+                .createdAt(LocalDateTime.now())
                 .owner(owner)
                 .build();
 

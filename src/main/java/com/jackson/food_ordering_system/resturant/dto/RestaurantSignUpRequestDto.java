@@ -17,7 +17,6 @@ public class RestaurantSignUpRequestDto {
 
     private String password;
 
-
     private String cuisine;
 
 

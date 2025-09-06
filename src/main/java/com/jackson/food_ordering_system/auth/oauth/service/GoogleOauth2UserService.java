@@ -35,20 +35,6 @@ public class GoogleOauth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        OAuth2User oAuth2User = super.loadUser(userRequest);
-
-        Map<String, Object> attrs = oAuth2User.getAttributes();
-        String email = (String) attrs.get("email");
-        String name = (String) attrs.getOrDefault("name", email);
-        String picture = (String) attrs.getOrDefault("profile", null);
-
-        userRepository.findByUsername(email).orElseGet(() -> {
-            UserEntity user = new UserEntity();
-            user.setUsername(email);
-            user.setPassword(bCryptPasswordEncoder.encode("OAUTH2"));
-            user.setRole("USER");
-            return userRepository.save(user);
-        });
-        return oAuth2User;
+        return super.loadUser(userRequest);
     }
 }

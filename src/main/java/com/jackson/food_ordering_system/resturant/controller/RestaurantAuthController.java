@@ -19,14 +19,9 @@ public class RestaurantAuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<RestaurantSignUpResponseDto> restaurantSignUp(@RequestPart("restaurantSignUpData")RestaurantSignUpRequestDto requestDto){
-
         RestaurantSignUpResponseDto response = restaurantSignUpService.registerRestaurant(requestDto);
-
         return ResponseEntity.ok(response);
 
     }
-
-
-
 
 }
