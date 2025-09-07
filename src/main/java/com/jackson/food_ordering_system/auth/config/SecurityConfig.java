@@ -2,6 +2,7 @@ package com.jackson.food_ordering_system.auth.config;
 
 import com.jackson.food_ordering_system.auth.oauth.handler.OAuth2LoginSuccessHandler;
 import com.jackson.food_ordering_system.auth.oauth.service.GoogleOauth2UserService;
+import com.jackson.food_ordering_system.resturant.repo.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,12 +32,14 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final GoogleOauth2UserService googleOauth2UserService;
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/api/restaurant/**", "/oauth2/**",  "/login/**",
                                 "/error", "/favicon.ico").permitAll()
@@ -51,6 +54,11 @@ public class SecurityConfig {
                             exception.printStackTrace();
                             response.sendRedirect("/login?error=" + exception.getMessage());
                         }))
+                .exceptionHandling(ex ->
+                        ex.authenticationEntryPoint(restAuthenticationEntryPoint)
+                                .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
+
+                )
                 .authenticationProvider(authenticationProvider())
                 // Add JWT filter after OAuth2 filter
                 .addFilterAfter(jwtAuthFilter, OAuth2LoginAuthenticationFilter.class)
@@ -62,6 +70,7 @@ public class SecurityConfig {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
+        authenticationProvider.setHideUserNotFoundExceptions(false);
         return authenticationProvider;
     }
 

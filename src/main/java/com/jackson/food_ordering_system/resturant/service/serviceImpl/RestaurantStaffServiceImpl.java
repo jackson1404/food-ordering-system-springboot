@@ -1,6 +1,7 @@
 package com.jackson.food_ordering_system.resturant.service.serviceImpl;
 
 import com.jackson.food_ordering_system.common.config.AppPropertiesConfig;
+import com.jackson.food_ordering_system.common.service.EmailService;
 import com.jackson.food_ordering_system.resturant.dto.StaffInviteRequestDto;
 import com.jackson.food_ordering_system.resturant.entity.InviteTokenEntity;
 import com.jackson.food_ordering_system.resturant.entity.RestaurantEntity;
@@ -21,12 +22,10 @@ import java.util.UUID;
 public class RestaurantStaffServiceImpl implements RestaurantStaffService {
 
     private final UserRepository userRepository;
-
     private final RestaurantRepository restaurantRepository;
-
     private final InviteTokenRepository inviteTokenRepository;
-
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     private final AppPropertiesConfig appPropertiesConfig;
 
@@ -52,6 +51,23 @@ public class RestaurantStaffServiceImpl implements RestaurantStaffService {
         inviteTokenRepository.save(invite);
 
         String inviteLink = String.format("%s/staff/setup?token=%s", appPropertiesConfig.getFrontendBaseUrl(), token);
+        emailService.sendEmail(
+                inviteRequestDto.getEmail(),
+                "You are invited to join " + restaurant.getRestaurantName(),
+                "<p>Hello,<p>" +
+                        "<p>You have been invited to join <b>" + restaurant.getRestaurantName() + "</b>.</p>" +
+                        "<p>Click here to set up your account: " +
+                        "<a href=\"" + inviteLink + "\">Complete Registration</a></p>"
+        );
+
+    }
+
+    @Override
+    public void completeStaffRegistration(String token, String password) {
+
+
+
+
 
     }
 

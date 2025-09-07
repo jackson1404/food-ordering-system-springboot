@@ -23,6 +23,16 @@ public class RestaurantStaffController {
 
     }
 
+    @PostMapping("/complete")
+    public ResponseEntity<Void> completeRegistration(
+            @RequestParam String token,
+            @RequestParam String password
+    ) {
+        restaurantStaffService.completeStaffRegistration(token, password);
+        return ResponseEntity.ok().build();
+    }
+
+
 
 
 

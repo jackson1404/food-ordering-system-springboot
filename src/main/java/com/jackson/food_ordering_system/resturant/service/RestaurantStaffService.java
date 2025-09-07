@@ -9,4 +9,5 @@ public interface RestaurantStaffService {
 
     void inviteStaff(Long restaurantId, StaffInviteRequestDto inviteRequestDto);
 
+    void completeStaffRegistration(String token, String password);
 }

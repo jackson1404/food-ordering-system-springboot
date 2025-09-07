@@ -50,7 +50,7 @@ public class RestaurantSignUpServiceImpl implements RestaurantSignUpService {
                 .username(requestDto.getOwnerName())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .phone(requestDto.getPhone())
-                .role("ROLE_RESTAURANT_OWNER")
+                .role("RESTAURANT_OWNER")
                 .build();
         userRepository.save(owner);
 
