@@ -51,7 +51,7 @@ public class RestaurantStaffServiceImpl implements RestaurantStaffService {
         inviteTokenRepository.save(invite);
 
         String inviteLink = String.format("%s/staff/setup?token=%s", appPropertiesConfig.getFrontendBaseUrl(), token);
-        emailService.sendEmail(
+        emailService.sendStaffInviteEmail(
                 inviteRequestDto.getEmail(),
                 "You are invited to join " + restaurant.getRestaurantName(),
                 "<p>Hello,<p>" +

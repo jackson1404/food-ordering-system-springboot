@@ -25,14 +25,16 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}/approve")
-    public ResponseEntity<Void> approveRestaurant(@PathVariable Long id) {
-        adminRestaurantService.approveRestaurant(id);
+    public ResponseEntity<Void> approveRestaurant(@PathVariable Long id,
+                                                  @RequestParam(value = "approveMessage", required = false) String approveMessage) {
+        adminRestaurantService.approveRestaurant(id, approveMessage);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/reject")
-    public ResponseEntity<Void> rejectRestaurant(@PathVariable Long id) {
-        adminRestaurantService.rejectRestaurant(id);
+    public ResponseEntity<Void> rejectRestaurant(@PathVariable Long id,
+                                                 @RequestParam(value= "rejectMessage", required = false) String rejectMessage) {
+        adminRestaurantService.rejectRestaurant(id, rejectMessage);
         return ResponseEntity.noContent().build();
     }
 

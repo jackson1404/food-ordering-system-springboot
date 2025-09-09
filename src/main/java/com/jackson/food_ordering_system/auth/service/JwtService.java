@@ -27,7 +27,7 @@ public class JwtService {
                 .setId(UUID.randomUUID().toString())
                 .setSubject(userName)
                 .setIssuedAt(new Date())
-                .setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.MINUTES)))
+                .setExpiration(Date.from(Instant.now().plus(60, ChronoUnit.MINUTES)))
                 .claim("role" , role)
                 .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()), SignatureAlgorithm.HS256)
                 .compact();

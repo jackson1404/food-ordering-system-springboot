@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AdminRestaurantService {
 
-    void approveRestaurant(Long id);
-    void rejectRestaurant(Long id);
+    void approveRestaurant(Long id, String approvalMessage);
+    void rejectRestaurant(Long id, String rejectMessage);
 
 }
